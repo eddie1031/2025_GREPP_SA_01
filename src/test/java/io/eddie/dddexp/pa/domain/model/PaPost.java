@@ -94,6 +94,9 @@ public class PaPost {
         return author;
     }
 
+    public PaPostStatus getStatus() {
+        return status;
+    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;

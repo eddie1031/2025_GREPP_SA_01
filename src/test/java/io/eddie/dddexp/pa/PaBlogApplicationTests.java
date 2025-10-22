@@ -15,7 +15,7 @@ class PaBlogApplicationTests {
 
         PaPostPersistencePort repository = new PaPostRepository();
 
-        application = new PaBlogApplication(repository);
+//        application = new PaBlogApplication(repository);
 
     }
 
