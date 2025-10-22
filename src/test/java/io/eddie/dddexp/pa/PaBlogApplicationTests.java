@@ -8,6 +8,8 @@ import io.eddie.dddexp.pa.domain.model.PaComment;
 import io.eddie.dddexp.pa.domain.model.PaPost;
 import io.eddie.dddexp.pa.domain.model.PaPostStatus;
 import io.eddie.dddexp.pa.domain.service.PaPostDomainService;
+import io.eddie.dddexp.pa.domain.vo.PaCommentDescription;
+import io.eddie.dddexp.pa.domain.vo.PaPostDescription;
 import io.eddie.dddexp.pa.infrastructure.PaCommentRepository;
 import io.eddie.dddexp.pa.infrastructure.PaPostRepository;
 import org.junit.jupiter.api.*;
@@ -106,10 +108,37 @@ class PaBlogApplicationTests {
 
             Assertions.assertNotNull(comment.getId());
 
-
         }
 
+        @Test
+        void view_post() {
 
+            application.publishPost(post.getId());
+
+            String comment_author = "댓글_작성자_2";
+            String comment_content = "댓글_내용_2";
+
+            application.addComment(
+                    post.getId(),
+                    comment_author,
+                    comment_content
+            );
+
+
+            PaPostDescription findPost = application.viewPost(post.getId());
+
+            Assertions.assertNotNull(findPost);
+
+            Assertions.assertEquals(1, findPost.comments().size());
+
+            PaCommentDescription firstComment = findPost.comments().getFirst();
+
+            Assertions.assertEquals(comment_author, firstComment.author());
+            Assertions.assertEquals(comment_content, firstComment.content());
+
+            System.out.println("findPost = " + findPost);
+
+        }
 
     }
 
