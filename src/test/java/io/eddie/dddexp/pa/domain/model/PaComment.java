@@ -14,6 +14,9 @@ public class PaComment {
     private LocalDateTime createdAt;
 
     public PaComment(String content, String author, Long postId) {
+
+        validate(author, content);
+
         this.content = content;
         this.author = author;
         this.postId = postId;

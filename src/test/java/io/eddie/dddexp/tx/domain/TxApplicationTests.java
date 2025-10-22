@@ -14,7 +14,7 @@ public class TxApplicationTests {
 
     @BeforeEach
     void init() {
-        txBlogService = new TxBlogService(new TxPostRepository());
+        txBlogService = new TxBlogService(new TxPostRepository(), null);
     }
 
     @Test

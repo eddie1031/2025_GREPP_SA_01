@@ -9,6 +9,7 @@ import io.eddie.dddexp.pa.domain.model.PaPostStatus;
 import io.eddie.dddexp.pa.domain.service.PaPostDomainService;
 import io.eddie.dddexp.pa.domain.vo.PaPostDescription;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PaBlogApplication implements BlogUseCase {
@@ -79,9 +80,9 @@ public class PaBlogApplication implements BlogUseCase {
         post.increaseViewCount();
         postPersistencePort.save(post);
 
-        commentPersistencePort.findAllByPostId(post.getId());
+        List<PaComment> comments = commentPersistencePort.findAllByPostId(post.getId());
 
-        return postDomainService.createPostDescription(post);
+        return postDomainService.createPostDescription(post, comments);
     }
 
 }
