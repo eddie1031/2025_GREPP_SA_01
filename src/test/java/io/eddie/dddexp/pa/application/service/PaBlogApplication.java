@@ -1,15 +1,15 @@
 package io.eddie.dddexp.pa.application.service;
 
 import io.eddie.dddexp.pa.application.port.in.BlogUseCase;
+import io.eddie.dddexp.pa.application.port.out.PaPostPersistencePort;
 import io.eddie.dddexp.pa.domain.model.PaPost;
-import io.eddie.dddexp.pa.infrastructure.PaPostRepository;
 
 public class PaBlogApplication implements BlogUseCase {
 
-    private final PaPostRepository paPostRepository;
+    private final PaPostPersistencePort postPersistencePort;
 
-    public PaBlogApplication(PaPostRepository paPostRepository) {
-        this.paPostRepository = paPostRepository;
+    public PaBlogApplication(PaPostPersistencePort postPersistencePort) {
+        this.postPersistencePort = postPersistencePort;
     }
 
     @Override
@@ -17,7 +17,7 @@ public class PaBlogApplication implements BlogUseCase {
 
         PaPost paPost = new PaPost(title, content, author);
 
-        return null;
+        return postPersistencePort.save(paPost);
     }
 
 }
